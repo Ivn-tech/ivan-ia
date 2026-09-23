@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="ivanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.6"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fond arrondi -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="#0b1020"/>
+
+  <!-- Halo lumineux -->
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="url(#glowGrad)" opacity="0.35" filter="url(#softGlow)"/>
+
+  <!-- Carré principal dégradé -->
+  <rect x="64" y="64" width="384" height="384" rx="80" fill="url(#ivanGrad)"/>
+
+  <!-- Reflet subtil en haut -->
+  <rect x="64" y="64" width="384" height="192" rx="80" fill="#ffffff" opacity="0.12"/>
+
+  <!-- Monogramme IV -->
+  <text x="256" y="300"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="180"
+        font-weight="800"
+        fill="#ffffff"
+        text-anchor="middle"
+        letter-spacing="-6">IV</text>
+
+  <!-- Petit point lumineux (accent IA) -->
+  <circle cx="380" cy="380" r="20" fill="#00d4ff" opacity="0.9">
+    <animate attributeName="r" values="20;24;20" dur="2.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="2.4s" repeatCount="indefinite"/>
+  </circle>
+</svg>
