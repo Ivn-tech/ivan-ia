@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>IVAN IA — Studio de création vidéo</title>
 
+<!-- ═══════════ PWA ═══════════ -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b1020">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -74,7 +75,10 @@
         animation: fadeIn 0.6s ease;
     }
     .onboarding.hidden { display: none; }
-    .onboarding-card { width: 100%; max-width: 420px; text-align: center; }
+    .onboarding-card {
+        width: 100%; max-width: 420px;
+        text-align: center;
+    }
     .onboarding-logo {
         width: 96px; height: 96px;
         border-radius: 28px;
@@ -149,6 +153,7 @@
         line-height: 1.5; text-align: center;
     }
     .onboarding-hint a { color: var(--brand-2); text-decoration: none; font-weight: 600; }
+    .onboarding-hint a:hover { text-decoration: underline; }
 
     /* ═══════════ HEADER ═══════════ */
     header {
@@ -443,48 +448,6 @@
         box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
     }
 
-    /* ═══════════ DURÉE MULTI-CLIPS ═══════════ */
-    .duration-grid {
-        display: grid; grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-        margin-bottom: 0.6rem;
-    }
-    .duration-card {
-        padding: 0.8rem 0.6rem;
-        border-radius: var(--radius-sm);
-        border: 1px solid var(--border-soft);
-        background: var(--bg-soft);
-        cursor: pointer; transition: all 0.18s;
-        text-align: center;
-    }
-    .duration-card:hover { border-color: var(--brand); transform: translateY(-1px); }
-    .duration-card.selected {
-        background: var(--brand-grad);
-        color: #fff; border-color: transparent;
-        box-shadow: var(--brand-glow);
-    }
-    .duration-card .duration-value {
-        font-size: 1.05rem; font-weight: 800;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-    }
-    .duration-card .duration-desc {
-        font-size: 0.65rem; opacity: 0.65;
-        margin-top: 0.2rem; line-height: 1.2;
-    }
-    .duration-card.selected .duration-desc { opacity: 0.9; }
-
-    .duration-info {
-        font-size: 0.72rem; color: var(--ink-dim);
-        padding: 0.6rem 0.8rem;
-        background: var(--bg-soft);
-        border-radius: 10px;
-        border: 1px solid var(--border-soft);
-        line-height: 1.5;
-    }
-    .duration-info strong { color: var(--ink); }
-    .duration-info .warn-text { color: var(--warn); font-weight: 600; }
-
     /* ═══════════ BOUTONS ═══════════ */
     .btn-primary {
         width: 100%; padding: 1.15rem;
@@ -534,64 +497,26 @@
         color: transparent;
     }
     .queue-summary .eta-text { color: var(--ink-dim); }
-
-    .global-progress {
-        height: 6px;
-        background: var(--bg-soft);
-        border-radius: 4px;
-        overflow: hidden;
-        margin-bottom: 0.8rem;
-        border: 1px solid var(--border-soft);
-    }
-    .global-progress-bar {
-        height: 100%;
-        background: var(--brand-grad);
-        border-radius: 4px;
-        transition: width 0.5s ease;
-        box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
-    }
-
-    .clip-group {
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius-sm);
-        padding: 0.7rem 0.8rem;
-        margin-bottom: 0.5rem;
-        background: var(--panel);
-        transition: border-color 0.3s;
-    }
-    .clip-group.active { border-color: var(--brand); background: rgba(108, 92, 231, 0.06); }
-    .clip-group.done { border-color: rgba(46, 230, 168, 0.4); background: rgba(46, 230, 168, 0.04); }
-
-    .clip-group-title {
-        font-size: 0.8rem; font-weight: 700;
-        display: flex; justify-content: space-between; align-items: center;
-        margin-bottom: 0.4rem;
-    }
-    .clip-group-title .clip-count {
-        font-size: 0.7rem; color: var(--ink-dim);
-        font-weight: 600;
-    }
-
     .queue-item {
-        display: flex; align-items: center; gap: 0.6rem;
-        padding: 0.45rem 0.5rem;
-        font-size: 0.78rem;
-        border-radius: 8px;
+        display: flex; align-items: center; gap: 0.8rem;
+        padding: 0.75rem 0.9rem; border-radius: var(--radius-sm);
+        border: 1px solid var(--border-soft);
+        margin-bottom: 0.45rem;
+        background: var(--panel);
+        transition: border-color 0.3s, opacity 0.3s, background 0.3s;
+        font-size: 0.82rem;
     }
-    .queue-item .q-icon { font-size: 0.9rem; width: 1.3rem; text-align: center; flex-shrink: 0; }
     .queue-item.pending { opacity: 0.55; }
-    .queue-item.creating .q-icon { color: var(--warn); }
+    .queue-item.creating { border-color: rgba(255, 184, 77, 0.5); background: rgba(255, 184, 77, 0.05); }
+    .queue-item.processing { border-color: var(--brand); background: rgba(108, 92, 231, 0.08); }
+    .queue-item.done { border-color: rgba(46, 230, 168, 0.4); background: rgba(46, 230, 168, 0.05); }
+    .queue-item.failed { border-color: rgba(255, 92, 122, 0.4); background: rgba(255, 92, 122, 0.05); }
+    .queue-item .q-icon { font-size: 1rem; width: 1.6rem; text-align: center; flex-shrink: 0; }
     .queue-item.processing .q-icon { color: var(--brand-2); }
     .queue-item.done .q-icon { color: var(--success); }
     .queue-item.failed .q-icon { color: var(--error); }
-    .queue-item .q-name {
-        flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .queue-item .q-status {
-        font-size: 0.7rem; color: var(--ink-dim);
-        text-align: right; flex-shrink: 0;
-    }
+    .queue-item .q-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+    .queue-item .q-status { font-size: 0.72rem; color: var(--ink-dim); text-align: right; flex-shrink: 0; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .queue-more { text-align: center; padding: 0.6rem; color: var(--ink-dim); font-size: 0.75rem; font-style: italic; }
 
     /* ═══════════ GALERIE ═══════════ */
@@ -612,17 +537,6 @@
         padding: 0.55rem 0.7rem; background: var(--panel);
         font-size: 0.7rem; color: var(--ink-dim); font-weight: 600;
     }
-    .gallery-item .g-badge {
-        position: absolute; top: 8px; left: 8px;
-        background: rgba(11, 16, 32, 0.85);
-        backdrop-filter: blur(6px);
-        color: #00d4ff;
-        padding: 0.2rem 0.5rem;
-        border-radius: 8px;
-        font-size: 0.65rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-    }
     .gallery-actions {
         display: flex; gap: 0.35rem;
         padding: 0 0.7rem 0.6rem;
@@ -641,7 +555,11 @@
         transition: all 0.18s;
         font-weight: 600;
     }
-    .gallery-actions button:hover { border-color: var(--brand); color: var(--ink); }
+    .gallery-actions button:hover {
+        border-color: var(--brand);
+        color: var(--ink);
+    }
+    .gallery-actions button:active { transform: scale(0.95); }
 
     /* ═══════════ STATUS BAR ═══════════ */
     .status-bar {
@@ -691,7 +609,10 @@
         display: flex; justify-content: space-between; align-items: center;
         margin-bottom: 1.5rem;
     }
-    .modal-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+    .modal-title {
+        font-size: 1.1rem; font-weight: 800;
+        letter-spacing: -0.02em;
+    }
     .modal-close {
         width: 36px; height: 36px;
         border-radius: 10px;
@@ -701,7 +622,10 @@
         cursor: pointer; font-size: 1rem;
         display: flex; align-items: center; justify-content: center;
     }
-    .settings-group { margin-bottom: 1.5rem; }
+    .modal-close:active { transform: scale(0.95); }
+    .settings-group {
+        margin-bottom: 1.5rem;
+    }
     .settings-group:last-child { margin-bottom: 0; }
     .settings-group-title {
         font-size: 0.7rem; font-weight: 800;
@@ -721,9 +645,18 @@
         gap: 0.8rem;
     }
     .settings-row:last-child { border-bottom: none; }
-    .settings-label { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
-    .settings-desc { font-size: 0.7rem; color: var(--ink-dim); margin-top: 0.15rem; line-height: 1.4; }
-    .settings-value { font-size: 0.8rem; color: var(--ink-dim); text-align: right; }
+    .settings-label {
+        font-size: 0.85rem; font-weight: 600;
+        color: var(--ink);
+    }
+    .settings-desc {
+        font-size: 0.7rem; color: var(--ink-dim);
+        margin-top: 0.15rem; line-height: 1.4;
+    }
+    .settings-value {
+        font-size: 0.8rem; color: var(--ink-dim);
+        text-align: right;
+    }
     .switch {
         position: relative;
         width: 46px; height: 26px;
@@ -750,6 +683,7 @@
         background: var(--bg-soft); color: var(--ink);
         font-family: ui-monospace, 'SF Mono', Menlo, monospace;
         font-size: 0.85rem;
+        transition: border-color 0.2s;
     }
     .settings-input:focus { outline: none; border-color: var(--brand); }
     .settings-btn {
@@ -762,6 +696,7 @@
         cursor: pointer; font-weight: 600;
         transition: all 0.18s;
     }
+    .settings-btn:hover { border-color: var(--brand); }
     .settings-btn.primary {
         background: var(--brand-grad);
         color: #fff; border: none;
@@ -777,6 +712,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
     .hidden { display: none !important; }
 
@@ -792,7 +728,9 @@
 </head>
 <body>
 
-<!-- ═══════════ ONBOARDING ═══════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     ÉCRAN D'ONBOARDING (premier lancement uniquement)
+     ═══════════════════════════════════════════════════════ -->
 <div class="onboarding" id="onboarding">
     <div class="onboarding-card">
         <div class="onboarding-logo">IV</div>
@@ -817,7 +755,9 @@
     </div>
 </div>
 
-<!-- ═══════════ HEADER ═══════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     APPLICATION PRINCIPALE
+     ═══════════════════════════════════════════════════════ -->
 <header>
     <div class="logo-mark">IV</div>
     <div class="header-text">
@@ -831,10 +771,9 @@
 </header>
 
 <div class="info-banner">
-    <strong>Comment ça marche :</strong> Ajoutez vos images, choisissez la durée,
-    écrivez votre vision (ou choisissez un effet). Chaque vidéo est
-    <strong>la prolongation animée de votre image</strong>, générée clip par clip
-    puis fusionnée automatiquement. Format <strong>portrait 9:16</strong>.
+    <strong>Comment ça marche :</strong> Ajoutez vos images, écrivez votre vision (ou choisissez un effet),
+    c'est parti. Chaque vidéo est <strong>la prolongation animée de votre image</strong> — même sujet, même composition,
+    juste le mouvement, la lumière et l'ambiance en plus. Format <strong>portrait 9:16</strong>.
 </div>
 
 <div class="upload-zone" id="upload-zone">
@@ -860,7 +799,8 @@
             <div class="prompt-presets" id="prompt-presets"></div>
             <div class="prompt-main-hint">
                 💡 Ce prompt s'applique à <strong>toutes</strong> les images. Si vous laissez vide et que vous choisissez
-                un effet ci-dessous, l'effet gérera les vidéos.
+                un effet ci-dessous, l'effet gérera les vidéos. Si vous écrivez un prompt ET choisissez un effet,
+                les deux se combinent.
             </div>
         </div>
     </div>
@@ -878,7 +818,7 @@
     </div>
 </div>
 
-<div class="section open" id="section-tech">
+<div class="section" id="section-tech">
     <div class="section-header" data-toggle="section-tech">
         <span class="section-title">📷 Réglages techniques</span>
         <span class="chevron">▼</span>
@@ -886,24 +826,12 @@
     <div class="section-body">
         <div class="section-content">
             <div class="control-row">
-                <label class="control-label">Durée de la vidéo finale</label>
-                <div class="duration-grid" id="duration-grid">
-                    <div class="duration-card selected" data-duration="153">
-                        <div class="duration-value">10 s</div>
-                        <div class="duration-desc">1 clip</div>
-                    </div>
-                    <div class="duration-card" data-duration="459">
-                        <div class="duration-value">30 s</div>
-                        <div class="duration-desc">3 clips</div>
-                    </div>
-                    <div class="duration-card" data-duration="918">
-                        <div class="duration-value">1 min</div>
-                        <div class="duration-desc">6 clips</div>
-                    </div>
-                </div>
-                <div class="duration-info" id="duration-info">
-                    <strong>1 clip</strong> · <strong>1 appel API</strong> · Temps estimé : ~2 min
-                </div>
+                <label class="control-label">Durée de chaque vidéo</label>
+                <select id="duration-select">
+                    <option value="121">5 secondes</option>
+                    <option value="153" selected>6,4 secondes (recommandé)</option>
+                    <option value="241">10 secondes</option>
+                </select>
             </div>
             <div class="control-row">
                 <label class="control-label">Cadrage</label>
@@ -919,7 +847,7 @@
                 <select id="intensity-select">
                     <option value="random">Aléatoire</option>
                     <option value="subtle">Subtile</option>
-                    <option value="moderate" selected>Modérée</option>
+                    <option value="moderate">Modérée</option>
                     <option value="strong">Forte</option>
                 </select>
             </div>
@@ -952,7 +880,9 @@
     <span id="toast-text">Message</span>
 </div>
 
-<!-- ═══════════ MODAL PARAMÈTRES ═══════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     MODAL PARAMÈTRES
+     ═══════════════════════════════════════════════════════ -->
 <div class="modal-backdrop" id="settings-modal">
     <div class="modal">
         <div class="modal-header">
@@ -960,6 +890,7 @@
             <button type="button" class="modal-close" id="settings-close">✕</button>
         </div>
 
+        <!-- Clé API -->
         <div class="settings-group">
             <div class="settings-group-title">🔑 Clé API</div>
             <input type="password" class="settings-input" id="settings-api-key"
@@ -977,6 +908,7 @@
             </div>
         </div>
 
+        <!-- Anti-veille -->
         <div class="settings-group">
             <div class="settings-group-title">💡 Écran</div>
             <div class="settings-row">
@@ -988,6 +920,7 @@
             </div>
         </div>
 
+        <!-- Préférences -->
         <div class="settings-group">
             <div class="settings-group-title">🎨 Préférences</div>
             <div class="settings-row">
@@ -995,7 +928,7 @@
                     <div class="settings-label">Durée par défaut</div>
                     <div class="settings-desc">Appliquée à chaque nouvelle session</div>
                 </div>
-                <div class="settings-value" id="settings-duration-value">10 s</div>
+                <div class="settings-value" id="settings-duration-value">6,4 s</div>
             </div>
             <div class="settings-row">
                 <div>
@@ -1006,6 +939,7 @@
             </div>
         </div>
 
+        <!-- Historique -->
         <div class="settings-group">
             <div class="settings-group-title">🗑️ Données</div>
             <div class="settings-row">
@@ -1019,6 +953,7 @@
             </div>
         </div>
 
+        <!-- À propos -->
         <div class="settings-group">
             <div class="settings-group-title">ℹ️ À propos</div>
             <div class="settings-row">
@@ -1026,7 +961,7 @@
                     <div class="settings-label">IVAN IA</div>
                     <div class="settings-desc">Studio de création vidéo propulsé par l'IA</div>
                 </div>
-                <div class="settings-value">v2.0.0</div>
+                <div class="settings-value">v1.0.0</div>
             </div>
             <div class="settings-row">
                 <div>
@@ -1039,21 +974,18 @@
     </div>
 </div>
 
+<!-- ═══════════ ÉLÉMENTS ANTI-VEILLE ═══════════ -->
 <canvas id="noSleepCanvas" width="2" height="2"></canvas>
 <video id="noSleepVideo" playsinline muted loop></video>
 
-<!-- ═══════════ FFMPEG (local) ═══════════ -->
-<script src="./ffmpeg/ffmpeg-core.js" type="text/javascript" id="ffmpeg-loader" defer></script>
-
 <script>
 // ══════════════════════════════════════════════════════════════════
-// IVAN IA — Moteur complet v2.0
+// IVAN IA — Moteur complet
 // ══════════════════════════════════════════════════════════════════
 const API_BASE = 'https://apihub.agnes-ai.com/v1';
 const POLL_BASE = 'https://apihub.agnes-ai.com/agnesapi';
 const MODEL_VIDEO = 'agnes-video-v2.0';
 const FRAME_RATE = 24;
-const FRAMES_PER_CLIP = 153; // 6,4 secondes (le modèle n'accepte pas exactement 10s)
 
 let createIntervalMs = 62000;
 const CREATE_INTERVAL_MIN = 62000;
@@ -1063,50 +995,15 @@ const CREATE_INTERVAL_SAFE = 75000;
 const POLL_INTERVAL_SEC = 8;
 const MAX_POLL_ATTEMPTS = 100;
 
-const TIMING_CACHE_KEY = 'ivan_ia_timing_cache_v2';
+const TIMING_CACHE_KEY = 'ivan_ia_timing_cache_v1';
 const API_KEY_STORAGE = 'ivan_ia_api_key';
 const WAKE_LOCK_PREF = 'ivan_ia_wakelock_enabled';
 const TOTAL_VIDEOS_KEY = 'ivan_ia_total_videos';
 const GALLERY_KEY = 'ivan_ia_gallery';
-const PENDING_JOBS_KEY = 'ivan_ia_pending_jobs';
 
 const MAX_VISIBLE_QUEUE = 30;
 const MAX_IMAGE_SIZE = 12 * 1024 * 1024;
 const THUMBNAIL_MAX_WIDTH = 200;
-
-// Configuration multi-clips
-const CLIP_COUNT_MAP = {
-    153: 1,   // 10 secondes  = 1 clip
-    459: 3,   // 30 secondes  = 3 clips
-    918: 6    // 1 minute     = 6 clips
-};
-const PARALLEL_CLIPS = 2;  // 2 clips en parallèle
-const IMAGE_REINJECT_EVERY = 3; // réinjecter l'image originale tous les 3 clips
-
-// ══════════════════════════════════════════════════════════════════
-// ÉTAT GLOBAL
-// ══════════════════════════════════════════════════════════════════
-const state = {
-    images: [],
-    isRunning: false,
-    stopRequested: false,
-    queue: [],
-    completed: 0,
-    failed: 0,
-    selectedEffect: null,
-    mainPrompt: '',
-    framing: 'random',
-    intensity: 'moderate',
-    totalFrames: 153,
-    clipCount: 1,
-    isLoadingImages: false,
-    creationAttemptsSinceLastError: 0,
-    gallery: [],
-    totalVideos: 0,
-    ffmpegLoaded: false,
-    ffmpeg: null,
-    pendingJobs: null
-};
 
 // ══════════════════════════════════════════════════════════════════
 // TOAST
@@ -1149,7 +1046,7 @@ async function requestWakeLockAPI() {
             updateWakeLockUI();
         });
         return true;
-    } catch (e) { return false; }
+    } catch (e) { console.warn('[WakeLock]', e.message); return false; }
 }
 
 async function releaseWakeLockAPI() {
@@ -1409,6 +1306,27 @@ const FRAMING_PRESETS = {
 };
 
 // ══════════════════════════════════════════════════════════════════
+// ÉTAT GLOBAL
+// ══════════════════════════════════════════════════════════════════
+const state = {
+    images: [],
+    isRunning: false,
+    stopRequested: false,
+    queue: [],
+    completed: 0,
+    failed: 0,
+    selectedEffect: null,
+    mainPrompt: '',
+    framing: 'random',
+    intensity: 'random',
+    durationFrames: 153,
+    isLoadingImages: false,
+    creationAttemptsSinceLastError: 0,
+    gallery: [],
+    totalVideos: 0
+};
+
+// ══════════════════════════════════════════════════════════════════
 // CLÉ API
 // ══════════════════════════════════════════════════════════════════
 function getApiKey() {
@@ -1417,6 +1335,9 @@ function getApiKey() {
 }
 function setApiKey(key) {
     try { localStorage.setItem(API_KEY_STORAGE, key.trim()); } catch (e) {}
+}
+function clearApiKey() {
+    try { localStorage.removeItem(API_KEY_STORAGE); } catch (e) {}
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -1616,13 +1537,12 @@ function renderStyles() {
 // ══════════════════════════════════════════════════════════════════
 // CONSTRUCTION DU PROMPT
 // ══════════════════════════════════════════════════════════════════
-function buildPrompt(clipIndex = 0, totalClips = 1, chained = false) {
+function buildPrompt() {
     const allEffects = AMBIANCE_EFFECTS.concat(STYLIZE_EFFECTS);
     const effect = state.selectedEffect ? allEffects.find(s => s.id === state.selectedEffect) : null;
     const isStylize = effect && STYLIZE_EFFECTS.some(s => s.id === state.selectedEffect);
     const hasUserPrompt = state.mainPrompt && state.mainPrompt.trim().length > 0;
     const parts = [];
-
     if (isStylize) {
         parts.push('Animate this image as the starting frame. Transform the entire image into the following artistic style:');
     } else {
@@ -1634,14 +1554,12 @@ function buildPrompt(clipIndex = 0, totalClips = 1, chained = false) {
             'The camera does NOT change the subject. Only subtle motion, breathing, light, and atmosphere are animated.'
         );
     }
-
     if (effect) {
         parts.push(effect.prompt);
         if (isStylize) {
             parts.push('Maintain the same subject, pose, and composition as the source image, but reinterpret everything in this new style.');
         }
     }
-
     if (hasUserPrompt) {
         if (isStylize) {
             parts.push('Additional artistic direction (applied on top of the style): ' + state.mainPrompt.trim());
@@ -1649,16 +1567,6 @@ function buildPrompt(clipIndex = 0, totalClips = 1, chained = false) {
             parts.push('Artistic direction (highest priority, must not change the subject identity or composition): ' + state.mainPrompt.trim());
         }
     }
-
-    // Contexte multi-clips : on précise que c'est une continuation
-    if (totalClips > 1) {
-        if (chained && clipIndex > 0) {
-            parts.push('This is clip ' + (clipIndex + 1) + ' of ' + totalClips + '. Continue the movement from the previous clip seamlessly. Do not restart the motion. The subject keeps evolving naturally.');
-        } else {
-            parts.push('This is clip ' + (clipIndex + 1) + ' of ' + totalClips + '. Generate a segment that blends naturally with the other clips.');
-        }
-    }
-
     if (state.framing !== 'random' && FRAMING_PRESETS[state.framing]) {
         parts.push(FRAMING_PRESETS[state.framing]);
     }
@@ -1689,12 +1597,14 @@ async function apiFetch(url, options = {}, label = 'API') {
                     createIntervalMs = Math.min(createIntervalMs + 8000, CREATE_INTERVAL_MAX);
                 }
                 const wait = [15, 30, 45, 60, 90, 120, 180][Math.min(attempt, 6)];
+                log(label + ' : 429, attente ' + wait + 's');
                 setStatus('L\'IA se prépare… (' + wait + 's)');
                 await sleep(wait * 1000);
                 continue;
             }
             if (res.status === 503) {
                 const wait = [5, 10, 15, 20, 30, 45][Math.min(attempt, 5)];
+                log(label + ' : 503, attente ' + wait + 's');
                 setStatus('Votre vidéo se prépare… (' + wait + 's)');
                 await sleep(wait * 1000);
                 continue;
@@ -1717,12 +1627,12 @@ async function apiFetch(url, options = {}, label = 'API') {
     return fetch(url, options);
 }
 
-async function createVideoTask(imageDataUri, prompt, clipIndex = 0, totalClips = 1) {
+async function createVideoTask(imageDataUri, prompt) {
     const body = {
         model: MODEL_VIDEO,
         prompt: prompt,
         image: imageDataUri,
-        num_frames: FRAMES_PER_CLIP,
+        num_frames: state.durationFrames,
         frame_rate: FRAME_RATE
     };
     const res = await apiFetch(API_BASE + '/videos', {
@@ -1744,7 +1654,7 @@ async function createVideoTask(imageDataUri, prompt, clipIndex = 0, totalClips =
 }
 
 async function pollVideo(videoId, onProgress) {
-    const estimatedMs = estimateGenerationTime(FRAMES_PER_CLIP);
+    const estimatedMs = estimateGenerationTime(state.durationFrames);
     const estimatedSec = estimatedMs / 1000;
     let remaining = Math.max(20, Math.floor(estimatedSec * 0.8));
     while (remaining > 0) {
@@ -1786,197 +1696,49 @@ async function pollVideo(videoId, onProgress) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// EXTRACTION DE LA DERNIÈRE IMAGE (via canvas + vidéo)
-// ══════════════════════════════════════════════════════════════════
-async function extractLastFrame(videoUrl) {
-    return new Promise((resolve, reject) => {
-        const video = document.createElement('video');
-        video.crossOrigin = 'anonymous';
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = 'auto';
-        video.src = videoUrl;
-        video.onloadedmetadata = () => {
-            // Se placer un tout petit peu avant la fin
-            const targetTime = Math.max(0, video.duration - 0.05);
-            video.currentTime = targetTime;
-        };
-        video.onseeked = () => {
-            try {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const dataUri = canvas.toDataURL('image/jpeg', 0.9);
-                resolve(dataUri);
-            } catch (e) {
-                reject(new Error('Erreur extraction image : ' + e.message));
-            }
-        };
-        video.onerror = () => reject(new Error('Erreur chargement vidéo'));
-    });
-}
-
-// ══════════════════════════════════════════════════════════════════
-// FFMPEG — CHARGEMENT LOCAL
-// ══════════════════════════════════════════════════════════════════
-async function ensureFFmpegLoaded() {
-    if (state.ffmpegLoaded && state.ffmpeg) return state.ffmpeg;
-    showToast('Chargement du moteur de fusion…', 'success', 2000);
-    setStatus('Chargement de FFmpeg (1ère fois uniquement)…');
-
-    try {
-        // Vérifier que la classe FFmpeg est disponible
-        if (typeof FFmpeg === 'undefined' && typeof window.FFmpeg === 'undefined') {
-            throw new Error('FFmpeg.wasm non chargé. Vérifiez le dossier ffmpeg/.');
-        }
-
-        const FFmpegClass = window.FFmpeg || FFmpeg;
-        const ffmpeg = new FFmpegClass();
-
-        // Charger le core depuis le dossier local
-        const coreURL = new URL('./ffmpeg/ffmpeg-core.js', window.location.href).href;
-        const wasmURL = new URL('./ffmpeg/ffmpeg-core.wasm', window.location.href).href;
-
-        await ffmpeg.load({
-            coreURL: coreURL,
-            wasmURL: wasmURL
-        });
-
-        state.ffmpeg = ffmpeg;
-        state.ffmpegLoaded = true;
-        log('FFmpeg chargé avec succès');
-        return ffmpeg;
-    } catch (e) {
-        console.error('Erreur FFmpeg :', e);
-        throw new Error('Impossible de charger FFmpeg : ' + e.message);
-    }
-}
-
-// ══════════════════════════════════════════════════════════════════
-// FUSION DES CLIPS AVEC FFMPEG
-// ══════════════════════════════════════════════════════════════════
-async function mergeClips(clipUrls, onProgress) {
-    const ffmpeg = await ensureFFmpegLoaded();
-    onProgress('Préparation de la fusion…');
-
-    // Télécharger tous les clips
-    const clipData = [];
-    for (let i = 0; i < clipUrls.length; i++) {
-        if (state.stopRequested) throw new Error('Arrêt demandé');
-        onProgress('Téléchargement du clip ' + (i + 1) + '/' + clipUrls.length + '…');
-        const res = await fetch(clipUrls[i]);
-        const blob = await res.blob();
-        const arrayBuffer = await blob.arrayBuffer();
-        const uint8 = new Uint8Array(arrayBuffer);
-        const fileName = 'clip_' + String(i).padStart(3, '0') + '.mp4';
-        await ffmpeg.writeFile(fileName, uint8);
-        clipData.push(fileName);
-    }
-
-    // Créer le fichier de liste pour la concaténation
-    const listContent = clipData.map(f => "file '" + f + "'").join('\n');
-    await ffmpeg.writeFile('list.txt', new TextEncoder().encode(listContent));
-
-    onProgress('Fusion des clips…');
-
-    // Concaténer
-    await ffmpeg.exec([
-        '-f', 'concat',
-        '-safe', '0',
-        '-i', 'list.txt',
-        '-c', 'copy',
-        'output.mp4'
-    ]);
-
-    onProgress('Lecture du résultat…');
-
-    const data = await ffmpeg.readFile('output.mp4');
-    const blob = new Blob([data.buffer], { type: 'video/mp4' });
-    const url = URL.createObjectURL(blob);
-
-    // Nettoyer les fichiers
-    try {
-        for (const f of clipData) await ffmpeg.deleteFile(f);
-        await ffmpeg.deleteFile('list.txt');
-        await ffmpeg.deleteFile('output.mp4');
-    } catch (e) { /* ignore */ }
-
-    onProgress('Fusion terminée !');
-    return url;
-}
-
-// ══════════════════════════════════════════════════════════════════
-// FILE D'ATTENTE — RENDU
+// FILE D'ATTENTE
 // ══════════════════════════════════════════════════════════════════
 function renderQueue() {
     const queueEl = document.getElementById('queue');
     if (!state.queue.length) { queueEl.style.display = 'none'; return; }
     queueEl.style.display = 'block';
-
     const total = state.queue.length;
     const done = state.completed + state.failed;
-    const totalClips = total * state.clipCount;
-    const doneClips = state.queue.reduce((acc, job) => {
-        return acc + (job.clips ? job.clips.filter(c => c.status === 'done').length : 0);
-    }, 0);
-
+    const inProgress = state.queue.filter(q => q.status === 'processing').length;
+    const pending = total - done - inProgress;
+    const estGen = estimateGenerationTime(state.durationFrames) / 1000;
+    const remainingCreates = pending;
+    const eta = remainingCreates > 0
+        ? (remainingCreates * (createIntervalMs / 1000)) + estGen
+        : (inProgress * estGen / Math.max(inProgress, 1));
     let html = '<div class="queue-summary">' +
-        '<span class="progress-text">' + done + '/' + total + ' vidéos</span>' +
-        '<span class="eta-text">' + doneClips + '/' + totalClips + ' clips</span>' +
+        '<span class="progress-text">Progression : ' + done + '/' + total + '</span>' +
+        '<span class="eta-text">' + (done < total ? '≈ ' + formatEta(eta) + ' restant' : 'Terminé') + '</span>' +
         '</div>';
-
-    // Barre de progression globale
-    const globalPercent = totalClips > 0 ? (doneClips / totalClips) * 100 : 0;
-    html += '<div class="global-progress">' +
-        '<div class="global-progress-bar" style="width:' + globalPercent + '%"></div>' +
-        '</div>';
-
     const visible = state.queue.slice(0, MAX_VISIBLE_QUEUE);
     const hidden = state.queue.length - visible.length;
-
-    html += visible.map(job => {
-        const clipsDone = job.clips ? job.clips.filter(c => c.status === 'done').length : 0;
-        const clipsTotal = job.clips ? job.clips.length : 0;
-        const groupClass = job.status === 'done' ? 'done' : (job.status === 'processing' || job.status === 'creating' ? 'active' : '');
-
-        let clipItems = '';
-        if (job.clips) {
-            clipItems = job.clips.map((clip, i) => {
-                let icon = '○', statusText = 'En attente';
-                if (clip.status === 'creating') { icon = '◐'; statusText = 'Création…'; }
-                else if (clip.status === 'processing') { icon = '◐'; statusText = clip.progress || 'En cours…'; }
-                else if (clip.status === 'done') { icon = '●'; statusText = 'Terminé'; }
-                else if (clip.status === 'failed') { icon = '✕'; statusText = 'Échec'; }
-                return '<div class="queue-item ' + clip.status + '">' +
-                    '<div class="q-icon">' + icon + '</div>' +
-                    '<div class="q-name">Clip ' + (i + 1) + '</div>' +
-                    '<div class="q-status">' + esc(statusText) + '</div>' +
-                '</div>';
-            }).join('');
-        }
-
-        return '<div class="clip-group ' + groupClass + '">' +
-            '<div class="clip-group-title">' +
-                '<span>Image ' + (job.imageIndex + 1) + '</span>' +
-                '<span class="clip-count">' + clipsDone + '/' + clipsTotal + ' clips</span>' +
-            '</div>' +
-            clipItems +
+    html += visible.map(item => {
+        let icon = '○', statusText = 'En file d\'attente', cls = 'pending';
+        if (item.status === 'creating') { icon = '◐'; statusText = 'Préparation…'; cls = 'creating'; }
+        else if (item.status === 'processing') { icon = '◐'; statusText = item.progress || 'En cours…'; cls = 'processing'; }
+        else if (item.status === 'done') { icon = '●'; statusText = 'Terminé'; cls = 'done'; }
+        else if (item.status === 'failed') { icon = '✕'; statusText = 'Échec'; cls = 'failed'; }
+        return '<div class="queue-item ' + cls + '">' +
+            '<div class="q-icon">' + icon + '</div>' +
+            '<div class="q-name">Image ' + (item.imageIndex + 1) + '</div>' +
+            '<div class="q-status">' + esc(statusText) + '</div>' +
         '</div>';
     }).join('');
-
     if (hidden > 0) {
         html += '<div class="queue-more">… et ' + hidden + ' autre' + (hidden > 1 ? 's' : '') + ' image' + (hidden > 1 ? 's' : '') + '</div>';
     }
-
     queueEl.innerHTML = html;
 }
 
 // ══════════════════════════════════════════════════════════════════
 // GALERIE
 // ══════════════════════════════════════════════════════════════════
-function addToGallery(videoUrl, label, durationSec) {
+function addToGallery(videoUrl, label) {
     const galleryEl = document.getElementById('gallery');
     const galleryGrid = document.getElementById('gallery-grid');
     galleryEl.style.display = 'block';
@@ -1985,7 +1747,6 @@ function addToGallery(videoUrl, label, durationSec) {
     el.className = 'gallery-item';
     el.dataset.videoId = id;
     el.innerHTML =
-        '<span class="g-badge">' + durationSec + ' s</span>' +
         '<video controls preload="metadata" playsinline>' +
             '<source src="' + videoUrl + '" type="video/mp4">' +
         '</video>' +
@@ -2006,7 +1767,7 @@ function addToGallery(videoUrl, label, durationSec) {
         });
     });
 
-    state.gallery.push({ id: id, url: videoUrl, label: label, date: Date.now(), duration: durationSec });
+    state.gallery.push({ id: id, url: videoUrl, label: label, date: Date.now() });
     saveGallery();
     incrementTotalVideos();
     updateSettingsValues();
@@ -2037,10 +1798,15 @@ async function shareVideo(url, label) {
             const blob = await res.blob();
             const file = new File([blob], 'ivan-ia-' + label + '.mp4', { type: 'video/mp4' });
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                await navigator.share({ files: [file], title: 'IVAN IA', text: 'Vidéo générée avec IVAN IA' });
+                await navigator.share({
+                    files: [file],
+                    title: 'IVAN IA',
+                    text: 'Vidéo générée avec IVAN IA'
+                });
                 return;
             }
         }
+        // Fallback : copier l'URL
         await navigator.clipboard.writeText(url);
         showToast('Lien copié', 'success');
     } catch (e) {
@@ -2068,7 +1834,6 @@ function renderGalleryFromStorage() {
         el.className = 'gallery-item';
         el.dataset.videoId = item.id;
         el.innerHTML =
-            '<span class="g-badge">' + (item.duration || '?') + ' s</span>' +
             '<video controls preload="metadata" playsinline>' +
                 '<source src="' + item.url + '" type="video/mp4">' +
             '</video>' +
@@ -2091,116 +1856,53 @@ function renderGalleryFromStorage() {
 }
 
 // ══════════════════════════════════════════════════════════════════
-// PIPELINE MULTI-CLIPS
+// PIPELINE
 // ══════════════════════════════════════════════════════════════════
-async function processOneImage(job) {
-    const totalClips = state.clipCount;
-    let currentImage = job.image.dataUri;
-    const clipResults = [];
-
-    // Créer la structure des clips
-    job.clips = [];
-    for (let i = 0; i < totalClips; i++) {
-        job.clips.push({ index: i, status: 'pending', progress: null, videoId: null, videoUrl: null });
-    }
-    job.status = 'processing';
-
-    // Parallélisation : on traite 2 clips à la fois
-    for (let batchStart = 0; batchStart < totalClips; batchStart += PARALLEL_CLIPS) {
-        if (state.stopRequested) throw new Error('Arrêt demandé');
-
-        const batchEnd = Math.min(batchStart + PARALLEL_CLIPS, totalClips);
-        const batch = [];
-        for (let i = batchStart; i < batchEnd; i++) {
-            batch.push(job.clips[i]);
-        }
-
-        // Lancer les clips du batch en parallèle
-        await Promise.all(batch.map(async (clip) => {
-            try {
-                clip.status = 'creating';
-                renderQueue();
-
-                // Déterminer l'image source
-                let sourceImage = currentImage;
-                // Réinjecter l'image originale tous les 3 clips
-                if (clip.index > 0 && clip.index % IMAGE_REINJECT_EVERY === 0) {
-                    sourceImage = job.image.dataUri;
-                    log('[Image ' + (job.imageIndex + 1) + '] Clip ' + (clip.index + 1) + ' : réinjection image originale');
-                }
-
-                // Construire le prompt pour ce clip
-                const prompt = buildPrompt(clip.index, totalClips, true);
-
-                // Créer la tâche
-                const videoId = await createVideoTask(sourceImage, prompt, clip.index, totalClips);
-                clip.videoId = videoId;
-                clip.startTime = Date.now();
-                clip.status = 'processing';
-                renderQueue();
-
-                // Poller jusqu'à la fin
-                const videoUrl = await pollVideo(videoId, (prog) => {
-                    clip.progress = prog;
-                    renderQueue();
-                });
-
-                const elapsed = Date.now() - clip.startTime;
-                recordGenerationTime(FRAMES_PER_CLIP, elapsed);
-
-                clip.status = 'done';
-                clip.videoUrl = videoUrl;
-                clip.progress = 'Terminé';
-
-                // Extraire la dernière image pour le chaînage
-                try {
-                    const lastFrame = await extractLastFrame(videoUrl);
-                    currentImage = lastFrame;
-                } catch (e) {
-                    log('Extraction frame échouée : ' + e.message);
-                }
-
-                renderQueue();
-            } catch (e) {
-                if (e.message === 'Arrêt demandé') {
-                    clip.status = 'failed';
-                    clip.progress = 'Arrêté';
-                } else {
-                    log('[Image ' + (job.imageIndex + 1) + '] Clip ' + (clip.index + 1) + ' : ' + e.message);
-                    clip.status = 'failed';
-                    clip.progress = 'Échec';
-                }
-                renderQueue();
-            }
-        }));
-    }
-
-    // Vérifier si tous les clips sont OK
-    const failedClips = job.clips.filter(c => c.status !== 'done');
-    if (failedClips.length > 0) {
-        throw new Error(failedClips.length + ' clip(s) en échec');
-    }
-
-    // Fusionner les clips (sauf s'il n'y en a qu'un)
-    const clipUrls = job.clips.map(c => c.videoUrl);
-    let finalUrl;
-
-    if (clipUrls.length === 1) {
-        finalUrl = clipUrls[0];
-    } else {
-        setStatus('Fusion des ' + clipUrls.length + ' clips en cours…');
-        finalUrl = await mergeClips(clipUrls, (msg) => setStatus(msg));
-    }
-
-    // Ajouter à la galerie
-    const durationSec = Math.round((totalClips * FRAMES_PER_CLIP) / FRAME_RATE);
-    addToGallery(finalUrl, 'Image ' + (job.imageIndex + 1), durationSec);
-
-    job.status = 'done';
-    job.videoUrl = finalUrl;
-    state.completed++;
+async function createTaskOnly(item) {
+    item.status = 'creating';
+    item.progress = 'Préparation…';
     renderQueue();
-    updateGenerateBtn();
+    const prompt = buildPrompt();
+    item.prompt = prompt;
+    log('[Image ' + (item.imageIndex + 1) + '] Création…');
+    const videoId = await createVideoTask(item.image.dataUri, prompt);
+    item.videoId = videoId;
+    item.startTime = Date.now();
+    item.status = 'processing';
+    item.progress = 'En cours…';
+    renderQueue();
+    return videoId;
+}
+
+async function pollTaskAndDisplay(item) {
+    try {
+        const videoUrl = await pollVideo(item.videoId, (prog) => {
+            item.progress = prog;
+            renderQueue();
+        });
+        const elapsed = Date.now() - item.startTime;
+        recordGenerationTime(state.durationFrames, elapsed);
+        log('[Image ' + (item.imageIndex + 1) + '] Terminée en ' + (elapsed / 1000).toFixed(1) + 's');
+        item.status = 'done';
+        item.videoUrl = videoUrl;
+        item.progress = 'Terminé';
+        state.completed++;
+        renderQueue();
+        updateGenerateBtn();
+        addToGallery(videoUrl, 'Image ' + (item.imageIndex + 1));
+    } catch (e) {
+        if (e.message === 'Arrêt demandé') {
+            item.status = 'failed';
+            item.progress = 'Arrêté';
+        } else {
+            log('[Image ' + (item.imageIndex + 1) + '] ' + e.message);
+            item.status = 'failed';
+            item.progress = 'Échec';
+            state.failed++;
+        }
+        renderQueue();
+        updateGenerateBtn();
+    }
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -2217,73 +1919,61 @@ async function startGeneration() {
     if (!state.mainPrompt && !state.selectedEffect) {
         if (!confirm('Ni prompt ni effet sélectionné. Continuer avec un style aléatoire ?')) return;
     }
-
-    // Confirmation du nombre d'appels API
-    const totalClips = state.clipCount * state.images.length;
-    if (state.clipCount > 1) {
-        const ok = confirm(
-            'Vous allez générer ' + state.images.length + ' vidéo' + (state.images.length > 1 ? 's' : '') +
-            ' de ' + (Math.round(state.clipCount * FRAMES_PER_CLIP / FRAME_RATE)) + ' secondes.\n\n' +
-            'Cela représente ' + totalClips + ' appels API au total.\n' +
-            'Temps estimé : ~' + Math.round(totalClips * 2) + ' minutes.\n\n' +
-            'Continuer ?'
-        );
-        if (!ok) return;
-    }
-
     state.isRunning = true;
     state.stopRequested = false;
     state.completed = 0;
     state.failed = 0;
     state.creationAttemptsSinceLastError = 0;
     createIntervalMs = CREATE_INTERVAL_MIN;
-
     state.queue = state.images.map((img, i) => ({
         imageIndex: i,
         image: img,
         status: 'pending',
-        clips: null,
+        progress: null,
+        videoId: null,
         videoUrl: null,
+        prompt: null,
         startTime: null
     }));
-
     document.getElementById('stop-btn').classList.add('visible');
     document.getElementById('generate-btn').disabled = true;
     await ensureWakeLockActive();
     renderQueue();
     updateGenerateBtn();
-
-    log('Démarrage — ' + state.images.length + ' images × ' + state.clipCount + ' clips = ' + totalClips + ' clips au total');
-
+    log('Démarrage — ' + state.images.length + ' vidéos');
     const totalStart = Date.now();
-    const jobs = state.queue.slice();
-
+    const pollingTasks = [];
     try {
-        for (let i = 0; i < jobs.length; i++) {
+        for (let i = 0; i < state.queue.length; i++) {
             if (state.stopRequested) break;
-            const job = jobs[i];
+            const item = state.queue[i];
             try {
-                await processOneImage(job);
+                await createTaskOnly(item);
+                pollingTasks.push(pollTaskAndDisplay(item));
             } catch (e) {
                 if (e.message === 'Arrêt demandé') break;
-                log('[Image ' + (i + 1) + '] Échec : ' + e.message);
-                job.status = 'failed';
+                log('[Image ' + (i + 1) + '] Échec création : ' + e.message);
+                item.status = 'failed';
+                item.progress = 'Échec';
                 state.failed++;
                 renderQueue();
                 updateGenerateBtn();
             }
-            // Petite pause entre les images (respect de l'API)
-            if (i < jobs.length - 1 && !state.stopRequested) {
+            if (i < state.queue.length - 1 && !state.stopRequested) {
                 const waitSec = Math.ceil(createIntervalMs / 1000);
                 for (let r = waitSec; r > 0; r--) {
                     if (state.stopRequested) break;
-                    setStatus('Respiration créative… — Image ' + (i + 2) + '/' + jobs.length + ' dans ' + r + 's');
+                    const nextNum = i + 2;
+                    setStatus('Respiration créative… — Image ' + nextNum + '/' + state.queue.length + ' dans ' + r + 's');
                     await sleep(1000);
                 }
             }
         }
+        if (pollingTasks.length > 0) {
+            setStatus('Finalisation…');
+            await Promise.allSettled(pollingTasks);
+        }
     } catch (e) { log('Erreur globale : ' + e.message); }
-
     const totalElapsed = (Date.now() - totalStart) / 1000;
     const summary = state.stopRequested
         ? 'Arrêté — ' + state.completed + '/' + state.queue.length + ' vidéos'
@@ -2292,7 +1982,6 @@ async function startGeneration() {
     setStatus(summary);
     await sleep(4000);
     setStatus(null);
-
     state.isRunning = false;
     state.stopRequested = false;
     document.getElementById('stop-btn').classList.remove('visible');
@@ -2324,8 +2013,7 @@ function updateGenerateBtn() {
     } else if (!hasImages) {
         btn.textContent = 'Ajoutez des images';
     } else {
-        const dur = Math.round(state.clipCount * FRAMES_PER_CLIP / FRAME_RATE);
-        btn.textContent = 'Créer ' + state.images.length + ' vidéo' + (state.images.length > 1 ? 's' : '') + ' de ' + dur + ' s';
+        btn.textContent = 'Créer ' + state.images.length + ' vidéo' + (state.images.length > 1 ? 's' : '');
     }
 }
 
@@ -2345,26 +2033,12 @@ function updateHeaderStatus() {
     }
 }
 
-function updateDurationInfo() {
-    const info = document.getElementById('duration-info');
-    if (!info) return;
-    const clipCount = state.clipCount;
-    const seconds = Math.round(clipCount * FRAMES_PER_CLIP / FRAME_RATE);
-    const apiCalls = clipCount;
-    const estMin = Math.round(clipCount * 2);
-    info.innerHTML =
-        '<strong>' + clipCount + ' clip' + (clipCount > 1 ? 's' : '') + '</strong> · ' +
-        '<strong>' + apiCalls + ' appel' + (apiCalls > 1 ? 's' : '') + ' API</strong> · ' +
-        'Durée finale : <strong>' + seconds + ' s</strong> · ' +
-        'Temps estimé : ~' + estMin + ' min';
-}
-
 function openSettings() {
     const modal = document.getElementById('settings-modal');
     if (!modal) return;
     document.getElementById('settings-api-key').value = getApiKey();
-    const dur = Math.round(state.clipCount * FRAMES_PER_CLIP / FRAME_RATE);
-    document.getElementById('settings-duration-value').textContent = dur + ' s';
+    document.getElementById('settings-duration-value').textContent =
+        ({ 121: '5 s', 153: '6,4 s', 241: '10 s' })[state.durationFrames] || '6,4 s';
     updateSettingsValues();
     updateWakeLockUI();
     modal.classList.add('visible');
@@ -2400,11 +2074,15 @@ function setupOnboarding() {
     const input = document.getElementById('onboarding-input');
     const btn = document.getElementById('onboarding-btn');
     if (!input || !btn) return;
+
     input.addEventListener('input', () => {
         btn.disabled = input.value.trim().length < 8;
     });
     input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !btn.disabled) { e.preventDefault(); btn.click(); }
+        if (e.key === 'Enter' && !btn.disabled) {
+            e.preventDefault();
+            btn.click();
+        }
     });
     btn.addEventListener('click', () => {
         const key = input.value.trim();
@@ -2423,7 +2101,18 @@ function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('[IVAN IA] SW enregistré'))
+            .then((reg) => {
+                console.log('[IVAN IA] SW enregistré :', reg.scope);
+                reg.addEventListener('updatefound', () => {
+                    const newWorker = reg.installing;
+                    if (!newWorker) return;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('[IVAN IA] Nouvelle version disponible');
+                        }
+                    });
+                });
+            })
             .catch((err) => console.warn('[IVAN IA] SW erreur :', err));
     });
 }
@@ -2432,20 +2121,33 @@ function registerServiceWorker() {
 // INITIALISATION
 // ══════════════════════════════════════════════════════════════════
 (function init() {
+    // État initial
+    state.durationFrames = 153;
     state.totalVideos = loadTotalVideos();
     state.gallery = loadGallery();
 
+    // Wake Lock préférence
     try {
         const saved = localStorage.getItem(WAKE_LOCK_PREF);
         wakeLockEnabled = saved === '1';
     } catch (e) {}
     if (wakeLockEnabled) activateWakeLock().then(() => updateWakeLockUI());
 
+    // Onboarding
     setupOnboarding();
     checkOnboarding();
+
+    // Header
     updateHeaderStatus();
     window.addEventListener('online', updateHeaderStatus);
     window.addEventListener('offline', updateHeaderStatus);
+
+    // Boutons principaux
+    const saveBtn = document.getElementById('api-save-btn');
+    if (saveBtn) saveBtn.addEventListener('click', () => {}); // legacy, retiré
+
+    const stopBtn = document.getElementById('stop-btn');
+    if (stopBtn) stopBtn.addEventListener('click', stopGeneration);
 
     // Sections collapsibles
     document.querySelectorAll('[data-toggle]').forEach(header => {
@@ -2471,20 +2173,13 @@ function registerServiceWorker() {
         mainPrompt.addEventListener('input', e => { state.mainPrompt = e.target.value; });
     }
 
-    // Sélecteur de durée (cartes)
-    document.querySelectorAll('.duration-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const frames = parseInt(card.dataset.duration, 10);
-            state.totalFrames = frames;
-            state.clipCount = CLIP_COUNT_MAP[frames] || 1;
-            document.querySelectorAll('.duration-card').forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-            updateDurationInfo();
-            updateGenerateBtn();
-        });
-    });
-
     // Sélecteurs
+    const durationSelect = document.getElementById('duration-select');
+    if (durationSelect) {
+        durationSelect.addEventListener('change', e => {
+            state.durationFrames = parseInt(e.target.value, 10);
+        });
+    }
     const framingSelect = document.getElementById('framing-select');
     if (framingSelect) framingSelect.addEventListener('change', e => { state.framing = e.target.value; });
     const intensitySelect = document.getElementById('intensity-select');
@@ -2493,8 +2188,6 @@ function registerServiceWorker() {
     // Bouton Générer
     const generateBtn = document.getElementById('generate-btn');
     if (generateBtn) generateBtn.addEventListener('click', startGeneration);
-    const stopBtn = document.getElementById('stop-btn');
-    if (stopBtn) stopBtn.addEventListener('click', stopGeneration);
 
     // Paramètres
     const settingsBtn = document.getElementById('settings-btn');
@@ -2572,7 +2265,6 @@ function registerServiceWorker() {
 
     // Rendu initial
     updateGenerateBtn();
-    updateDurationInfo();
     renderPromptPresets();
     renderStyles();
     renderImages();
@@ -2580,7 +2272,7 @@ function registerServiceWorker() {
     renderGalleryFromStorage();
     updateSettingsValues();
 
-    log('Prêt — IVAN IA v2.0.0 (multi-clips)');
+    log('Prêt — IVAN IA v1.0.0');
 })();
 </script>
 
